@@ -1,5 +1,5 @@
 //styles
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.css';
 //icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,7 +14,7 @@ function App() {
   const [author, setAuthor] = useState('waiting for author')
   const [color, setColor] = useState(colors[0])
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     //change the color
     if (colors.indexOf(color) === colors.length - 1) {
       setColor(colors[0])
@@ -30,7 +30,7 @@ function App() {
     } catch(err) {
       setQuote('err.message')
     }
-  }
+  }, [color])
 
   useEffect(() => {
     handleClick()
