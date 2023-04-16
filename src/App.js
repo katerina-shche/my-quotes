@@ -30,11 +30,11 @@ function App() {
     } catch(err) {
       setQuote('err.message')
     }
-  }, [color, colors ])
+  }, [color, colors])
 
   useEffect(() => {
     handleClick()
-  }, [colors])
+  })
 
 
   if (quote) {return (
