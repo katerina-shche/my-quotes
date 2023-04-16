@@ -34,7 +34,7 @@ function App() {
 
   useEffect(() => {
     handleClick()
-  })
+  }, [])
 
 
   if (quote) {return (
