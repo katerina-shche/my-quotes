@@ -1,5 +1,5 @@
 //styles
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import './App.css';
 //icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,16 +9,16 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 
 function App() {
-  const colors = ['pink', '#D35E0A', '#934107', '#0a7fd3', '#f1ceb5', '#d3c30a']
+  const colors = useRef(['pink', '#D35E0A', '#934107', '#0a7fd3', '#f1ceb5', '#d3c30a'])
   const [quote, setQuote] = useState(null)
   const [author, setAuthor] = useState('waiting for author')
   const [color, setColor] = useState(colors[0])
 
   const handleClick = useCallback(() => {
     //change the color
-    if (colors.indexOf(color) === colors.length - 1) {
-      setColor(colors[0])
-    } else {setColor(colors[colors.indexOf(color) + 1])}
+    if (colors.current.indexOf(color) === colors.length - 1) {
+      setColor(colors.current[0])
+    } else {setColor(colors.current[colors.current.indexOf(color) + 1])}
     //fetch the quote
     try {
     fetch('https://api.quotable.io/random')
@@ -30,11 +30,11 @@ function App() {
     } catch(err) {
       setQuote('err.message')
     }
-  }, [color])
+  }, [color, colors ])
 
   useEffect(() => {
     handleClick()
-  }, [])
+  }, [colors])
 
 
   if (quote) {return (
