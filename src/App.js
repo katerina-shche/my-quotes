@@ -16,7 +16,7 @@ function App() {
 
   const handleClick = useCallback(() => {
     //change the color
-    if (colors.current.indexOf(color) === colors.length - 1) {
+    if (colors.current.indexOf(color) === colors.current.length - 1) {
       setColor(colors.current[0])
     } else {setColor(colors.current[colors.current.indexOf(color) + 1])}
     //fetch the quote
